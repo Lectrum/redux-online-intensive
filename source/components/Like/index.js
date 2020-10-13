@@ -44,7 +44,7 @@ export default class Like extends Component {
             <ul>
                 {likes.map((like) => (
                     <li key = { like.get('id') }>{`${like.get(
-                        'firstName',
+                        'firstName'
                     )} ${like.get('lastName')}`}</li>
                 ))}
             </ul>

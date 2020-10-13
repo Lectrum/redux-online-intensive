@@ -1,21 +1,21 @@
-import { groupId, MAIN_URL } from "./config";
+import { groupId, MAIN_URL } from './config';
 
 export const api = {
     posts: {
         fetch () {
             return fetch(`${MAIN_URL}/feed`, {
-                method:  "GET",
+                method:  'GET',
                 headers: {
-                    "x-no-auth": groupId,
+                    'x-no-auth': groupId,
                 },
             });
         },
         createPost (comment) {
             return fetch(`${MAIN_URL}/feed`, {
-                method:  "POST",
+                method:  'POST',
                 headers: {
-                    "x-no-auth": groupId,
-                    ContentType: "application/json",
+                    'x-no-auth': groupId,
+                    ContentType: 'application/json',
                 },
                 body: JSON.stringify({ comment }),
             });

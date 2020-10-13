@@ -15,59 +15,59 @@ import { selectPosts } from '../../bus/posts/selectors';
 import { fetchPostsAsync, createPostAsync } from '../../bus/posts/actions';
 
 const mapStateToProps = (state) => ({
-  posts: selectPosts(state),
+    posts: selectPosts(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(
-    {
-      fetchPostsAsync,
-      createPostAsync,
-    },
-    dispatch
-  ),
+    actions: bindActionCreators(
+        {
+            fetchPostsAsync,
+            createPostAsync,
+        },
+        dispatch
+    ),
 });
 
 @connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )
 export default class Posts extends Component {
-  static defaultProps = {
-    // State
-    profile: mockedProfile,
-  };
+    static defaultProps = {
+        // State
+        profile: mockedProfile,
+    };
 
-  componentDidMount() {
-    const { actions } = this.props;
+    componentDidMount () {
+        const { actions } = this.props;
 
-    actions.fetchPostsAsync();
-  }
+        actions.fetchPostsAsync();
+    }
 
-  render() {
-    const { actions, posts, profile } = this.props;
+    render () {
+        const { actions, posts, profile } = this.props;
 
-    const postsJSX = posts.map((post) => {
-      return (
-        <Catcher key={post.get('id')}>
-          <Post
-            actions={actions}
-            author={post.get('author')}
-            comment={post.get('comment')}
-            created={post.get('created')}
-            id={post.get('id')}
-            likes={post.get('likes')}
-            profile={profile}
-          />
-        </Catcher>
-      );
-    });
+        const postsJSX = posts.map((post) => {
+            return (
+                <Catcher key = { post.get('id') }>
+                    <Post
+                        actions = { actions }
+                        author = { post.get('author') }
+                        comment = { post.get('comment') }
+                        created = { post.get('created') }
+                        id = { post.get('id') }
+                        likes = { post.get('likes') }
+                        profile = { profile }
+                    />
+                </Catcher>
+            );
+        });
 
-    return (
-      <section className={Styles.posts}>
-        <Composer actions={actions} profile={profile} />
-        <FlipMove>{postsJSX}</FlipMove>
-      </section>
-    );
-  }
+        return (
+            <section className = { Styles.posts }>
+                <Composer actions = { actions } profile = { profile } />
+                <FlipMove>{postsJSX}</FlipMove>
+            </section>
+        );
+    }
 }
