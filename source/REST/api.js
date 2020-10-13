@@ -2,23 +2,23 @@ import { groupId, MAIN_URL } from './config';
 
 export const api = {
     posts: {
-        fetch () {
+        fetch() {
             return fetch(`${MAIN_URL}/feed`, {
-                method:  'GET',
+                method: 'GET',
                 headers: {
-                    'x-no-auth': groupId,
-                },
+                    'x-no-auth': groupId
+                }
             });
         },
-        createPost (comment) {
+        createPost(comment) {
             return fetch(`${MAIN_URL}/feed`, {
-                method:  'POST',
+                method: 'POST',
                 headers: {
                     'x-no-auth': groupId,
-                    ContentType: 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ comment }),
+                body: JSON.stringify({ comment })
             });
-        },
-    },
+        }
+    }
 };
