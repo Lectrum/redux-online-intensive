@@ -1,5 +1,5 @@
 import {
-    ADD_CREATED_POST,
+    CREATE_POST,
     CREATE_POST_ASYNC,
     FETCH_POSTS_ASYNC,
     FILL_POSTS
@@ -10,6 +10,12 @@ export const fillPosts = posts => {
     return {
         type: FILL_POSTS,
         payload: posts
+    };
+};
+export const createPost = post => {
+    return {
+        type: CREATE_POST,
+        payload: post
     };
 };
 
@@ -38,9 +44,6 @@ export const createPostAsync = message => async dispatch => {
         const response = await api.posts.createPost(message);
         const result = await response.json();
 
-        dispatch({
-            type: ADD_CREATED_POST,
-            payload: result.data
-        });
+        dispatch(createPost(result.data));
     } catch (error) {}
 };
