@@ -1,72 +1,73 @@
 // Core
-import React, { Component } from "react";
-import { List } from "immutable";
-import FlipMove from "react-flip-move";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import React, { Component } from 'react';
+import { List } from 'immutable';
+import FlipMove from 'react-flip-move';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Instruments
-import Styles from "./styles.m.css";
-import { mockedProfile } from "../../instruments/mockedData";
+import Styles from './styles.m.css';
+import { mockedProfile } from '../../instruments/mockedData';
 
 // Components
-import { Composer, Catcher, Post } from "../../components";
-import { selectPosts } from "../../bus/posts/selectors";
-import { fetchPostsAsync } from "../../bus/posts/actions";
+import { Composer, Catcher, Post } from '../../components';
+import { selectPosts } from '../../bus/posts/selectors';
+import { fetchPostsAsync, createPostAsync } from '../../bus/posts/actions';
 
 const mapStateToProps = (state) => ({
-    posts: selectPosts(state),
+  posts: selectPosts(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(
-        {
-            fetchPostsAsync,
-        },
-        dispatch
-    ),
+  actions: bindActionCreators(
+    {
+      fetchPostsAsync,
+      createPostAsync,
+    },
+    dispatch
+  ),
 });
 
 @connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )
 export default class Posts extends Component {
-    static defaultProps = {
-        // State
-        profile: mockedProfile,
-    };
+  static defaultProps = {
+    // State
+    profile: mockedProfile,
+  };
 
-    componentDidMount () {
-        const { actions } = this.props;
+  componentDidMount() {
+    const { actions } = this.props;
 
-        actions.fetchPostsAsync();
-    }
+    actions.fetchPostsAsync();
+  }
 
-    render () {
-        const { actions, posts, profile } = this.props;
+  render() {
+    const { actions, posts, profile } = this.props;
 
-        const postsJSX = posts.map((post) => {
-            return (
-                <Catcher key = { post.get("id") }>
-                    <Post
-                        actions = { actions }
-                        author = { post.get("author") }
-                        comment = { post.get("comment") }
-                        created = { post.get("created") }
-                        id = { post.get("id") }
-                        likes = { post.get("likes") }
-                        profile = { profile }
-                    />
-                </Catcher>
-            );
-        });
+    const postsJSX = posts.map((post) => {
+      return (
+        <Catcher key={post.get('id')}>
+          <Post
+            actions={actions}
+            author={post.get('author')}
+            comment={post.get('comment')}
+            created={post.get('created')}
+            id={post.get('id')}
+            likes={post.get('likes')}
+            profile={profile}
+          />
+        </Catcher>
+      );
+    });
 
-        return (
-            <section className = { Styles.posts }>
-                <Composer actions = { actions } profile = { profile } />
-                <FlipMove>{postsJSX}</FlipMove>
-            </section>
-        );
-    }
+    return (
+      <section className={Styles.posts}>
+        <Composer actions={actions} profile={profile} />
+        <FlipMove>{postsJSX}</FlipMove>
+      </section>
+    );
+  }
 }
