@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
 
-import { reducer as gallery } from "../gallery";
+import { postsReducer as posts } from "../posts/reducer";
 
-export const rootReducer = combineReducers({ gallery });
+export const rootReducer = combineReducers({ posts });
