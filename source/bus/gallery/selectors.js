@@ -1,20 +1,10 @@
-import { createSelector } from "reselect";
-import _ from "lodash";
+export const selectPhotos = (state) => state.gallery.photos;
 
-export const selectPhotos = createSelector(
-  ({ gallery }) => gallery.photos,
-  (photos) => photos
-);
+export const selectSelectedPhotoIndex = (state) =>
+  state.gallery.selectedPhotoIndex;
 
-export const selectSelectedPhotoIndex = createSelector(
-  ({ gallery }) => gallery.selectedPhotoIndex,
-  (selectedPhotoIndex) => selectedPhotoIndex
-);
-
-export const selectCurrentPhoto = createSelector(
-  selectPhotos,
-  selectSelectedPhotoIndex,
-  (photos, selectedIndex) => {
-    return _.nth(photos, selectedIndex);
-  }
-);
+export const selectCurrentPhoto = (state) => {
+  let photos = selectPhotos(state);
+  let selectedIndex = selectSelectedPhotoIndex(state);
+  return selectedIndex > photos.length ? photos[0] : photos[selectedIndex];
+};
