@@ -10,7 +10,7 @@ export const api = {
                 }
             });
         },
-        createPost(comment) {
+        create(comment) {
             return fetch(`${MAIN_URL}/feed`, {
                 method: 'POST',
                 headers: {
