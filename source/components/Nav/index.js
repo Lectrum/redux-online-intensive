@@ -2,19 +2,27 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import cx from 'classnames';
+import { connect } from 'react-redux';
 
 // Instruments
 import Styles from './styles.m.css';
 import { book } from '../../navigation/book';
 import { mockedProfile } from '../../instruments/mockedData';
+import { selectIsAuthenticated } from '../../bus/auth/selectors';
+
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: selectIsAuthenticated(state),
+    };
+};
 
 @withRouter
+@connect(mapStateToProps)
 export default class Nav extends Component {
     static defaultProps = {
         // State
-        profile:         mockedProfile,
-        isAuthenticated: true,
-        isOnline:        false,
+        profile:  mockedProfile,
+        isOnline: false,
 
         // Actions
         logoutAsync: () => {},

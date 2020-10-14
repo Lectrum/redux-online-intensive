@@ -1,1 +1,4 @@
-export const selectPosts = (state) => state.posts;
+
+const store = 'posts';
+
+export const selectPosts = (state) => state[store];
