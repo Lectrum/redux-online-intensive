@@ -6,17 +6,17 @@ import {
 } from './types';
 import { api } from '../../REST';
 
-export const fillPosts = posts => {
+export const fillPosts = (posts) => {
     return {
-        type: FILL_POSTS,
-        payload: posts
+        type:    FILL_POSTS,
+        payload: posts,
     };
 };
 
-export const fetchPostsAsync = () => async dispatch => {
+export const fetchPostsAsync = () => async (dispatch) => {
     try {
         dispatch({
-            type: FETCH_POSTS_ASYNC
+            type: FETCH_POSTS_ASYNC,
         });
 
         const response = await api.posts.fetch();
@@ -28,19 +28,19 @@ export const fetchPostsAsync = () => async dispatch => {
     }
 };
 
-export const createPostAsync = message => async dispatch => {
+export const createPostAsync = (message) => async (dispatch) => {
     try {
         dispatch({
-            type: CREATE_POST_ASYNC,
-            payload: message
+            type:    CREATE_POST_ASYNC,
+            payload: message,
         });
 
         const response = await api.posts.createPost(message);
         const result = await response.json();
 
         dispatch({
-            type: ADD_CREATED_POST,
-            payload: result.data
+            type:    ADD_CREATED_POST,
+            payload: result.data,
         });
     } catch (error) {}
 };
