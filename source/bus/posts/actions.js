@@ -20,7 +20,18 @@ export const postsActions = {
             payload: post,
         };
     },
-
+    removePost: (postId) => {
+        return {
+            type:    types.REMOVE_POST,
+            payload: postId,
+        };
+    },
+    removePostAsync: (postId) => {
+        return {
+            type:    types.REMOVE_POST_ASYNC,
+            payload: postId,
+        };
+    },
     fetchPostsAsync: () => ({
         type: types.FETCH_POSTS_ASYNC,
     }),
