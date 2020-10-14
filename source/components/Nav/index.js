@@ -23,7 +23,7 @@ export default class Nav extends Component {
     _getNav = () => {
         const { isAuthenticated, profile } = this.props;
 
-        return isAuthenticated ?
+        return isAuthenticated ? (
             <>
                 <div>
                     <NavLink activeClassName = { Styles.active } to = { book.profile }>
@@ -36,7 +36,7 @@ export default class Nav extends Component {
                 </div>
                 <button onClick = { this._logout }>Выйти</button>
             </>
-            :
+        ) : (
             <>
                 <div>
                     <NavLink activeClassName = { Styles.active } to = { book.login }>
@@ -48,7 +48,7 @@ export default class Nav extends Component {
                 </div>
                 <button className = { Styles.hidden }>Выйти</button>
             </>
-        ;
+        );
     };
 
     _logout = () => {
