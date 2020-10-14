@@ -9,22 +9,23 @@ import Styles from './styles.m.css';
 import { book } from '../../navigation/book';
 import { selectIsAuthenticated } from '../../bus/auth/selectors';
 import { selectProfile } from '../../bus/profile/selectors';
+import { authActions } from '../../bus/auth/actions';
 
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: selectIsAuthenticated(state),
         profile:         selectProfile(state),
-
     };
 };
 
-@connect(mapStateToProps)
+const mapDispatchToProps = {
+    logoutAsync: authActions.logoutAsync,
+};
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Nav extends Component {
     static defaultProps = {
         isOnline: false,
-
-        // Actions
-        logoutAsync: () => {},
     };
 
     _getNav = () => {

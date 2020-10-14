@@ -8,6 +8,12 @@ export const postsActions = {
         };
     },
 
+    clearPosts: () => {
+        return {
+            type: types.CLEAR_POSTS,
+        };
+    },
+
     createPost: (post) => {
         return {
             type:    types.CREATE_POST,

@@ -3,41 +3,41 @@ import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 
+import { Loading } from '../components';
 // Pages
-import { Login, Signup, Feed, Profile, NewPassword } from '../pages';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import { book } from './book';
-import { selectIsAuthenticated } from '../bus/auth/selectors';
+import { withRouter } from 'react-router-dom';
+import { authActions } from '../bus/auth/actions';
+import { selectIsAuthenticated, selectIsInitialized } from '../bus/auth/selectors';
+
+import Private from './Private';
+import Public from './Public';
 
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: selectIsAuthenticated(state),
+        isInitialized:   selectIsInitialized(state),
     };
+};
+
+const mapDispatchToProps = {
+    initializeAsync: authActions.initializeAsync,
 };
 
 @hot(module)
 @withRouter
-@connect(mapStateToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class App extends Component {
-    render () {
-        const { isAuthenticated } = this.props;
+    componentDidMount () {
+        this.props.initializeAsync();
+    }
 
-        return isAuthenticated ? (
-            <Switch>
-                <Route component = { Feed } path = { book.feed } />
-                <Route component = { Profile } path = { book.profile } />
-                <Route component = { NewPassword } path = { book.newPassword } />
-                <Redirect to = { book.feed } />
-            </Switch>
-        ): (
-            <Switch>
-                <Route component = { Login } path = { book.login } />
-                <Route component = { Signup } path = { book.signUp } />
-                <Route component = { Feed } path = { book.feed } />
-                <Route component = { Profile } path = { book.profile } />
-                <Route component = { NewPassword } path = { book.newPassword } />
-                <Redirect to = { book.login } />
-            </Switch>
-        );
+    render () {
+        const { isAuthenticated, isInitialized } = this.props;
+
+        if (!isInitialized) {
+            return <Loading />;
+        }
+
+        return isAuthenticated ? <Private /> : <Public />;
     }
 }
