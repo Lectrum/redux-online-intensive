@@ -7,20 +7,20 @@ import { connect } from 'react-redux';
 // Instruments
 import Styles from './styles.m.css';
 import { book } from '../../navigation/book';
-import { mockedProfile } from '../../instruments/mockedData';
 import { selectIsAuthenticated } from '../../bus/auth/selectors';
+import { selectProfile } from '../../bus/profile/selectors';
 
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: selectIsAuthenticated(state),
+        profile:         selectProfile(state),
+
     };
 };
 
 @connect(mapStateToProps)
 export default class Nav extends Component {
     static defaultProps = {
-        // State
-        profile:  mockedProfile,
         isOnline: false,
 
         // Actions
