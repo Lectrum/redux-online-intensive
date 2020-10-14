@@ -1,6 +1,6 @@
 // Core
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
 import { connect } from 'react-redux';
 
@@ -16,7 +16,6 @@ const mapStateToProps = (state) => {
     };
 };
 
-@withRouter
 @connect(mapStateToProps)
 export default class Nav extends Component {
     static defaultProps = {

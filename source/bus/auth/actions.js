@@ -1,6 +1,6 @@
 import { types } from './types';
 
-export const authAction = {
+export const authActions = {
 
     authenticate: () => {
         return {
