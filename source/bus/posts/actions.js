@@ -1,27 +1,26 @@
 import { types } from './types';
-import { api } from '../../REST';
 
 export const postsActions = {
-    fillPosts: posts => {
+    fillPosts: (posts) => {
         return {
-            type: types.FILL_POSTS,
-            payload: posts
+            type:    types.FILL_POSTS,
+            payload: posts,
         };
     },
 
-    createPost: post => {
+    createPost: (post) => {
         return {
-            type: types.CREATE_POST,
-            payload: post
+            type:    types.CREATE_POST,
+            payload: post,
         };
     },
 
     fetchPostsAsync: () => ({
-        type: types.FETCH_POSTS_ASYNC
+        type: types.FETCH_POSTS_ASYNC,
     }),
 
-    createPostAsync: message => ({
-        type: types.CREATE_POST_ASYNC,
-        payload: message
-    })
+    createPostAsync: (message) => ({
+        type:    types.CREATE_POST_ASYNC,
+        payload: message,
+    }),
 };

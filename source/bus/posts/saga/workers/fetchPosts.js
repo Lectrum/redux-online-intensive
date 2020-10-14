@@ -2,7 +2,7 @@ import { apply, put } from 'redux-saga/effects';
 import { api } from '../../../../REST';
 import { postsActions } from '../../actions';
 
-export function* fetchPosts() {
+export function* fetchPosts () {
     try {
         const response = yield apply(api, api.posts.fetch);
         const { data: posts, message } = yield apply(response, response.json);
