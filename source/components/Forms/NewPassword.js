@@ -33,20 +33,32 @@ export default class NewPassword extends Component {
                 render = { (props) => {
                     const { isValid, touched, errors } = props;
 
-                    const newPasswordFormWrapperStyles = cx(Styles.newPasswordFormWrapper, Styles.wrapper, {
-                        [Styles.disabledInput]: isFetching,
-                    });
+                    const newPasswordFormWrapperStyles = cx(
+                        Styles.newPasswordFormWrapper,
+                        Styles.wrapper,
+                        {
+                            [Styles.disabledInput]: isFetching,
+                        }
+                    );
                     const oldPasswordStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.oldPassword && errors.oldPassword,
+                        [Styles.invalidInput]:
+                            !isValid &&
+                            touched.oldPassword &&
+                            errors.oldPassword,
                     });
                     const newPasswordStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.newPassword && errors.newPassword,
+                        [Styles.invalidInput]:
+                            !isValid &&
+                            touched.newPassword &&
+                            errors.newPassword,
                     });
 
                     const buttonStyle = cx(Styles.loginSubmit, {
                         [Styles.disabledButton]: isFetching,
                     });
-                    const buttonMessage = isFetching ? 'Загрузка...' : 'Сменить пароль';
+                    const buttonMessage = isFetching
+                        ? 'Загрузка...'
+                        : 'Сменить пароль';
 
                     return (
                         <Form className = { Styles.form }>
