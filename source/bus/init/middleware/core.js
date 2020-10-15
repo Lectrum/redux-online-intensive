@@ -20,7 +20,8 @@ const logger = createLogger({
 const history = createBrowserHistory();
 const routerMiddleware = createRouterMiddleware(history);
 const sagaMiddleware = createSageMiddleware();
-const devtools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_;
+
+const devtools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 const composeEnhancers = __DEV__ && devtools ? devtools : compose;
 
 const middleware = [sagaMiddleware, customThunk, routerMiddleware];
