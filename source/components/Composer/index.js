@@ -45,7 +45,9 @@ export default class Composer extends Component {
                                 <Field
                                     component = 'textarea'
                                     name = 'comment'
-                                    placeholder = { `What's on your mind, ${profile.get('firstName')}?` }
+                                    placeholder = { `What's on your mind, ${profile.get(
+                                        'firstName'
+                                    )}?` }
                                     type = 'text'
                                     onKeyPress = { this._submitFormOnEnter }
                                 />
