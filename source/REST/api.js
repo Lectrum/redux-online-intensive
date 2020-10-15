@@ -88,4 +88,14 @@ export const api = {
             });
         },
     },
+    users: {
+        fetch () {
+            return fetch(`${MAIN_URL}/user/all`, {
+                method:  'GET',
+                headers: {
+                    Authorization: this.token,
+                },
+            });
+        },
+    },
 };

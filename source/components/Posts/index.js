@@ -11,6 +11,7 @@ import Styles from './styles.m.css';
 import { Composer, Catcher, Post } from '../../components';
 import { selectPosts } from '../../bus/posts/selectors';
 import { postsActions } from '../../bus/posts/actions';
+import { usersActions } from '../../bus/users/actions';
 import { selectProfile } from '../../bus/profile/selectors';
 
 const mapStateToProps = (state) => ({
@@ -20,7 +21,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(
-        postsActions,
+        { ...postsActions, ...usersActions },
         dispatch
     ),
 });
@@ -35,6 +36,7 @@ export default class Posts extends Component {
         const { actions } = this.props;
 
         actions.fetchPostsAsync();
+        actions.fetchUsersAsync();
     }
 
     render () {
