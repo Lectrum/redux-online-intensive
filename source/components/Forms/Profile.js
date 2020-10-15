@@ -3,27 +3,30 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Control } from 'react-redux-form';
 import cx from 'classnames';
-import { Map } from 'immutable';
 
 // Instruments
 import Styles from './styles.m.css';
 import { validateLength } from '../../instruments/validators';
 import { book } from '../../navigation/book';
+import { connect } from 'react-redux';
 
 // Components
 import { Input } from '../../components';
 
+// Instruments
+import { selectIsFetching } from '../../bus/ui/selectors';
+import { selectProfile } from '../../bus/profile/selectors';
+import { profileActions } from '../../bus/profile/actions';
+
+const mapStateToProps = (state) => ({
+    isFetching: selectIsFetching(state),
+    profile:    selectProfile(state),
+});
+
+const mapDispatchToProps = profileActions;
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Profile extends Component {
-    static defaultProps = {
-        // State
-        isFetching: false,
-        profile:    Map(),
-
-        // Actions
-        updateNameAsync:   () => {},
-        updateAvatarAsync: () => {},
-    };
-
     _submitUserInfo = (userInfo) => {
         const { updateNameAsync, updateAvatarAsync } = this.props;
 

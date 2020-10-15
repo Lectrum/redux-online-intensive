@@ -7,6 +7,7 @@ import { postsActions } from '../../../posts/actions';
 import { book } from '../../../../navigation/book';
 import { replace } from 'react-router-redux';
 import { usersActions } from '../../../users/actions';
+import { actions } from 'react-redux-form';
 
 export function* logout () {
     try {
@@ -29,6 +30,8 @@ export function* logout () {
         yield put(postsActions.clearPosts());
         yield put(usersActions.clearUsers());
         yield put(uiActions.stopFetching());
+
+        yield put(actions.reset('forms.user'));
         yield put(authActions.logout());
         yield put(replace(book.login));
     }
