@@ -1,6 +1,5 @@
 // Core
 import React, { Component } from 'react';
-import { List } from 'immutable';
 import FlipMove from 'react-flip-move';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -21,11 +20,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(
-        {
-            fetchPostsAsync: postsActions.fetchPostsAsync,
-            createPostAsync: postsActions.createPostAsync,
-            removePostAsync: postsActions.removePostAsync,
-        },
+        postsActions,
         dispatch
     ),
 });

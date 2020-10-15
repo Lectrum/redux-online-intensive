@@ -9,6 +9,18 @@ export const postsReducer = (state = initialState, action) => {
             return fromJS(action.payload);
         case types.CREATE_POST:
             return state.unshift(fromJS(action.payload));
+        case types.LIKE_POST:
+            return state.updateIn([state.findIndex((post) => {
+                return post.get('id') === action.payload.postId;
+            }), 'likes'], (likes) => {
+                return likes.unshift(action.payload.liker);
+            });
+        case types.UNLIKE_POST:
+            return state.updateIn([state.findIndex((post) => {
+                return post.get('id') === action.payload.postId;
+            }), 'likes'], (likes) => {
+                return likes.filter((x) => x.get('id') !== action.payload.liker.get('id'));
+            });
         case types.REMOVE_POST:
             return state.filter((x) => {
                 return x.get('id') !== action.payload;
