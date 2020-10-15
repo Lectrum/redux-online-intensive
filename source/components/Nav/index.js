@@ -10,10 +10,12 @@ import { book } from '../../navigation/book';
 import { selectIsAuthenticated } from '../../bus/auth/selectors';
 import { selectProfile } from '../../bus/profile/selectors';
 import { authActions } from '../../bus/auth/actions';
+import { selectIsOnline } from '../../bus/ui/selectors';
 
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: selectIsAuthenticated(state),
+        isOnline:        selectIsOnline(state),
         profile:         selectProfile(state),
     };
 };
@@ -24,10 +26,6 @@ const mapDispatchToProps = {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Nav extends Component {
-    static defaultProps = {
-        isOnline: false,
-    };
-
     _getNav = () => {
         const { isAuthenticated, profile } = this.props;
 
