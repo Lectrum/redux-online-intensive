@@ -7,16 +7,16 @@ import { connect } from 'react-redux';
 // Instruments
 import Styles from './styles.m.css';
 import { book } from '../../navigation/book';
-import { selectIsAuthenticated } from '../../bus/auth/selectors';
-import { selectProfile } from '../../bus/profile/selectors';
+import { authSelectors } from '../../bus/auth/selectors';
+import { profileSelectors } from '../../bus/profile/selectors';
 import { authActions } from '../../bus/auth/actions';
 import { selectIsOnline } from '../../bus/ui/selectors';
 
 const mapStateToProps = (state) => {
     return {
-        isAuthenticated: selectIsAuthenticated(state),
+        isAuthenticated: authSelectors.selectIsAuthenticated(state),
         isOnline:        selectIsOnline(state),
-        profile:         selectProfile(state),
+        profile:         profileSelectors.selectProfile(state),
     };
 };
 

@@ -8,14 +8,14 @@ import cx from 'classnames';
 import Styles from './styles.m.css';
 import { login } from '../../bus/forms/shapes';
 import { authActions } from '../../bus/auth/actions';
-import { selectIsFetching } from '../../bus/ui/selectors';
+import { uiSelectors } from '../../bus/ui/selectors';
 
 const mapDispatchToProps = {
     loginAsync: authActions.loginAsync,
 };
 
 const mapStateToProps = (state) => ({
-    isFetching: selectIsFetching(state),
+    isFetching: uiSelectors.selectIsFetching(state),
 });
 
 @connect(mapStateToProps, mapDispatchToProps)

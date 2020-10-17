@@ -9,12 +9,12 @@ import { connect } from 'react-redux';
 import Styles from './styles.m.css';
 import { newPassword } from '../../bus/forms/shapes';
 import { book } from '../../navigation/book';
-import { selectIsFetching } from '../../bus/ui/selectors';
+import { uiSelectors } from '../../bus/ui/selectors';
 import { profileActions } from '../../bus/profile/actions';
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: selectIsFetching(state),
+        isFetching: uiSelectors.selectIsFetching(state),
     };
 };
 

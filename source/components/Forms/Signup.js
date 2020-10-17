@@ -7,12 +7,12 @@ import { connect } from 'react-redux';
 // Instruments
 import Styles from './styles.m.css';
 import { signup } from '../../bus/forms/shapes';
-import { selectIsFetching } from '../../bus/ui/selectors';
+import { uiSelectors } from '../../bus/ui/selectors';
 import { authActions } from '../../bus/auth/actions';
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: selectIsFetching(state),
+        isFetching: uiSelectors.selectIsFetching(state),
     };
 };
 

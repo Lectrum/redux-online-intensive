@@ -6,8 +6,7 @@ import { hot } from 'react-hot-loader';
 // Instruments
 import Styles from './styles.m.css';
 import {
-    selectCurrentPhoto,
-    selectSelectedPhotoIndex
+    gallerySelectors
 } from '../../../bus/gallery/selectors';
 import {
     showNextPhoto,
@@ -18,8 +17,8 @@ import cn from 'classnames/bind';
 
 const mapStateToProps = (state) => {
     return {
-        currentPhoto:       selectCurrentPhoto(state),
-        selectedPhotoIndex: selectSelectedPhotoIndex(state),
+        currentPhoto:       gallerySelectors.selectCurrentPhoto(state),
+        selectedPhotoIndex: gallerySelectors.selectSelectedPhotoIndex(state),
     };
 };
 

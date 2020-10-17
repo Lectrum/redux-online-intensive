@@ -1,7 +1,7 @@
 import { socket } from '../init/socket';
 import { postsActions } from '../posts/actions';
 import { uiActions } from '../ui/actions';
-import { selectUserById } from '../users/selectors';
+import { usersSelectors } from '../users/selectors';
 
 export const socketActions =  {
     listenConnection: () => (dispatch) => {
@@ -28,7 +28,7 @@ export const socketActions =  {
             const { data, meta } = JSON.parse(event);
 
             if (meta.action === 'like') {
-                const liker = selectUserById(getState())(data.userId).delete('avatar');
+                const liker = usersSelectors.selectUserById(getState())(data.userId).delete('avatar');
 
                 dispatch(postsActions.likePost({
                     postId: data.postId,

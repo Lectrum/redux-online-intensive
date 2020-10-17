@@ -14,13 +14,13 @@ import { connect } from 'react-redux';
 import { Input } from '../../components';
 
 // Instruments
-import { selectIsFetching } from '../../bus/ui/selectors';
-import { selectProfile } from '../../bus/profile/selectors';
+import { uiSelectors } from '../../bus/ui/selectors';
+import { profileSelectors } from '../../bus/profile/selectors';
 import { profileActions } from '../../bus/profile/actions';
 
 const mapStateToProps = (state) => ({
-    isFetching: selectIsFetching(state),
-    profile:    selectProfile(state),
+    isFetching: uiSelectors.selectIsFetching(state),
+    profile:    profileSelectors.selectProfile(state),
 });
 
 const mapDispatchToProps = profileActions;

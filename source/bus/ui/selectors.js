@@ -1,4 +1,6 @@
 const store = 'ui';
 
-export const selectIsFetching = (state) => state[store].get('isFetching');
-export const selectIsOnline = (state) => state[store].get('isOnline');
+export const uiSelectors = {
+    selectIsFetching: (state) => state[store].get('isFetching'),
+    selectIsOnline:   (state) => state[store].get('isOnline'),
+};

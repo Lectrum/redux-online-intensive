@@ -8,7 +8,7 @@ import { Loading } from '../components';
 import { withRouter } from 'react-router-dom';
 import { authActions } from '../bus/auth/actions';
 import { socketActions } from '../bus/socket/actions';
-import { selectIsAuthenticated, selectIsInitialized } from '../bus/auth/selectors';
+import { authSelectors } from '../bus/auth/selectors';
 
 import Private from './Private';
 import Public from './Public';
@@ -16,8 +16,8 @@ import { joinSocketChannel, socket } from '../bus/init/socket';
 
 const mapStateToProps = (state) => {
     return {
-        isAuthenticated: selectIsAuthenticated(state),
-        isInitialized:   selectIsInitialized(state),
+        isAuthenticated: authSelectors.selectIsAuthenticated(state),
+        isInitialized:   authSelectors.selectIsInitialized(state),
     };
 };
 

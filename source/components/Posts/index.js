@@ -9,14 +9,14 @@ import Styles from './styles.m.css';
 
 // Components
 import { Composer, Catcher, Post } from '../../components';
-import { selectPosts } from '../../bus/posts/selectors';
+import { postsSelectors } from '../../bus/posts/selectors';
 import { postsActions } from '../../bus/posts/actions';
 import { usersActions } from '../../bus/users/actions';
-import { selectProfile } from '../../bus/profile/selectors';
+import { profileSelectors } from '../../bus/profile/selectors';
 
 const mapStateToProps = (state) => ({
-    posts:   selectPosts(state),
-    profile: selectProfile(state),
+    posts:   postsSelectors.selectPosts(state),
+    profile: profileSelectors.selectProfile(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

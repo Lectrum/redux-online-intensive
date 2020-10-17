@@ -1,6 +1,6 @@
 import { apply, put, select } from 'redux-saga/effects';
 import { api } from '../../../../REST';
-import { selectProfileBase } from '../../../profile/selectors';
+import { profileSelectors } from '../../../profile/selectors';
 import { uiActions } from '../../../ui/actions';
 import { postsActions } from '../../actions';
 
@@ -13,7 +13,7 @@ export function* likePost ({ payload: postId }) {
             throw new Error(response.message);
         }
 
-        const liker = yield select(selectProfileBase);
+        const liker = yield select(profileSelectors.selectProfileBase);
 
         yield put(postsActions.likePost({ liker, postId }));
     } catch (error) {

@@ -1,5 +1,6 @@
 const store = 'profile';
 
-export const selectProfile = (state) => state[store];
-
-export const selectProfileBase = (state) => state[store].removeAll(['avatar', 'token']);
+export const profileSelectors = {
+    selectProfile:     (state) => state[store],
+    selectProfileBase: (state) => state[store].removeAll(['avatar', 'token']),
+};
