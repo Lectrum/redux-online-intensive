@@ -17,6 +17,18 @@ const userProfile = {
 
 const profileSet = [userProfile, { ...userProfile, id: 'TEST_ID_2' }, { ...userProfile, id: 'TEST_ID_3' }];
 
+const newName = {
+    firstName: 'Walter',
+    lastName:  "White",
+};
+
+const newAvatar = ['avatar'];
+
+const newPassword = {
+    oldPassword: 12345,
+    newPassword: 123456,
+};
+
 const credentials = {
     email:    'test@email.com',
     password: '1111',
@@ -62,6 +74,9 @@ global.__ = {
     fetchResponseFail400,
     credentials,
     url,
+    newName,
+    newAvatar,
+    newPassword,
 };
 global.fetch = fetch;
 global.localStorage = new LocalStorage();
