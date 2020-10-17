@@ -2,7 +2,7 @@ import { profileSelectors } from "../selectors";
 import { fromJS } from "immutable";
 
 const state = {
-    profile: fromJS(__.userProfile)
+    profile: fromJS(__.userProfile),
 };
 
 describe("profile selectors", () => {
