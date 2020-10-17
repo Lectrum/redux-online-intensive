@@ -15,7 +15,7 @@ const userProfile = {
     token,
 };
 
-const profileSet = [userProfile, userProfile, userProfile];
+const profileSet = [userProfile, { ...userProfile, id: 'TEST_ID_2' }, { ...userProfile, id: 'TEST_ID_3' }];
 
 const credentials = {
     email:    'test@email.com',

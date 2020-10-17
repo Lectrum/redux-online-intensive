@@ -8,9 +8,10 @@ const state = {
 
 describe('users selectors', () => {
     test('should select users', () => {
-        expect(usersSelectors.selectUsers(state)).toEqual(__.profileSet);
+        expect(usersSelectors.selectUsers(state)).toEqual(fromJS(__.profileSet));
     });
+
     test('should select user by id', () => {
-        expect(usersSelectors.selectUserById(state)(__.userProfile.id)).toEqual(__.userProfile);
+        expect(usersSelectors.selectUserById(state)(__.userProfile.id)).toEqual(fromJS(__.userProfile));
     });
 });
