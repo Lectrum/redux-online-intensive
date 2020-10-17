@@ -2,7 +2,7 @@
 import { LocalStorage } from './mocks/localStorage';
 import { fetch } from './mocks/fetch';
 
-const successMesasge = 'TEST_SUCCESS_MESSAGE.';
+const successMessage = 'TEST_SUCCESS_MESSAGE.';
 const errorMessage = 'TEST_ERROR_MESSAGE.';
 const token = 'TEST_TOKEN';
 const error = new Error(errorMessage);
@@ -15,6 +15,8 @@ const userProfile = {
     token,
 };
 
+const profileSet = [userProfile, { ...userProfile, id: 'TEST_ID_2' }, { ...userProfile, id: 'TEST_ID_3' }];
+
 const credentials = {
     email:    'test@email.com',
     password: '1111',
@@ -23,7 +25,7 @@ const credentials = {
 
 const responseDataSuccess = {
     data:    userProfile,
-    message: successMesasge,
+    message: successMessage,
 };
 
 const responseDataFail = {
@@ -49,6 +51,7 @@ const url = 'https://www.url.com';
 
 global.__ = {
     userProfile,
+    profileSet,
     errorMessage,
     token,
     error,

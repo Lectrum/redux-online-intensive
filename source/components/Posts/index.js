@@ -1,39 +1,42 @@
 // Core
 import React, { Component } from 'react';
-import { List } from 'immutable';
 import FlipMove from 'react-flip-move';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Instruments
 import Styles from './styles.m.css';
-import { mockedProfile } from '../../instruments/mockedData';
 
 // Components
 import { Composer, Catcher, Post } from '../../components';
+import { postsSelectors } from '../../bus/posts/selectors';
+import { postsActions } from '../../bus/posts/actions';
+import { usersActions } from '../../bus/users/actions';
+import { profileSelectors } from '../../bus/profile/selectors';
 
+const mapStateToProps = (state) => ({
+    posts:   postsSelectors.selectPosts(state),
+    profile: profileSelectors.selectProfile(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(
+        { ...postsActions, ...usersActions },
+        dispatch
+    ),
+});
+
+@connect(
+    mapStateToProps,
+    mapDispatchToProps
+)
 export default class Posts extends Component {
-    static defaultProps = {
-        // State
-        posts:   List(),
-        profile: mockedProfile,
-
-        // Actions
-        actions: {
-            // Users
-            fetchUsersAsync: () => {},
-
-            // Posts
-            fetchPostsAsync: () => {},
-            removePostAsync: () => {},
-            createPostAsync: () => {},
-            likePostAsync:   () => {},
-            unlikePostAsync: () => {},
-        },
-    };
 
     componentDidMount () {
         const { actions } = this.props;
 
         actions.fetchPostsAsync();
+        actions.fetchUsersAsync();
     }
 
     render () {

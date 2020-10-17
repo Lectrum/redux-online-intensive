@@ -1,21 +1,25 @@
 // Core
 import React, { Component } from 'react';
 import { Formik, Form, Field } from 'formik';
+import { connect } from 'react-redux';
 import cx from 'classnames';
 
 // Instruments
 import Styles from './styles.m.css';
 import { login } from '../../bus/forms/shapes';
+import { authActions } from '../../bus/auth/actions';
+import { uiSelectors } from '../../bus/ui/selectors';
 
+const mapDispatchToProps = {
+    loginAsync: authActions.loginAsync,
+};
+
+const mapStateToProps = (state) => ({
+    isFetching: uiSelectors.selectIsFetching(state),
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class LoginForm extends Component {
-    static defaultProps = {
-        // State
-        isFetching: false,
-
-        // Actions
-        loginAsync: () => {},
-    };
-
     _submitLoginForm = (credentials) => {
         this.props.loginAsync(credentials);
     };
@@ -29,14 +33,20 @@ export default class LoginForm extends Component {
                 render = { (props) => {
                     const { isValid, touched, errors } = props;
 
-                    const centeredWrapperStyle = cx(Styles.wrapper, Styles.centered, {
-                        [Styles.disabledInput]: isFetching,
-                    });
+                    const centeredWrapperStyle = cx(
+                        Styles.wrapper,
+                        Styles.centered,
+                        {
+                            [Styles.disabledInput]: isFetching,
+                        }
+                    );
                     const emailStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.email && errors.email,
+                        [Styles.invalidInput]:
+                            !isValid && touched.email && errors.email,
                     });
                     const passwordStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.password && errors.password,
+                        [Styles.invalidInput]:
+                            !isValid && touched.password && errors.password,
                     });
                     const buttonStyle = cx(Styles.loginSubmit, {
                         [Styles.disabledButton]: isFetching,
@@ -62,10 +72,17 @@ export default class LoginForm extends Component {
                                         type = 'password'
                                     />
                                     <label className = { Styles.rememberMe }>
-                                        <Field checked = { props.values.remember } name = 'remember' type = 'checkbox' />
+                                        <Field
+                                            checked = { props.values.remember }
+                                            name = 'remember'
+                                            type = 'checkbox'
+                                        />
                                         Запомнить меня
                                     </label>
-                                    <button className = { buttonStyle } disabled = { isFetching } type = 'submit'>
+                                    <button
+                                        className = { buttonStyle }
+                                        disabled = { isFetching }
+                                        type = 'submit'>
                                         {buttonMessage}
                                     </button>
                                 </div>

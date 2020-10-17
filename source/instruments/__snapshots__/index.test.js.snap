@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`instruments sum function must return an addition of two passed arguments 1`] = `9`;
