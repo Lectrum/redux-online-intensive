@@ -1,29 +1,35 @@
 // Core
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
+import { connect } from 'react-redux';
 
 // Instruments
 import Styles from './styles.m.css';
 import { book } from '../../navigation/book';
-import { mockedProfile } from '../../instruments/mockedData';
+import { authSelectors } from '../../bus/auth/selectors';
+import { profileSelectors } from '../../bus/profile/selectors';
+import { authActions } from '../../bus/auth/actions';
+import { selectIsOnline } from '../../bus/ui/selectors';
 
-@withRouter
-export default class Nav extends Component {
-    static defaultProps = {
-        // State
-        profile:         mockedProfile,
-        isAuthenticated: true,
-        isOnline:        false,
-
-        // Actions
-        logoutAsync: () => {},
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: authSelectors.selectIsAuthenticated(state),
+        isOnline:        selectIsOnline(state),
+        profile:         profileSelectors.selectProfile(state),
     };
+};
 
+const mapDispatchToProps = {
+    logoutAsync: authActions.logoutAsync,
+};
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Nav extends Component {
     _getNav = () => {
         const { isAuthenticated, profile } = this.props;
 
-        return isAuthenticated ?
+        return isAuthenticated ? (
             <>
                 <div>
                     <NavLink activeClassName = { Styles.active } to = { book.profile }>
@@ -36,7 +42,7 @@ export default class Nav extends Component {
                 </div>
                 <button onClick = { this._logout }>Выйти</button>
             </>
-            :
+        ) : (
             <>
                 <div>
                     <NavLink activeClassName = { Styles.active } to = { book.login }>
@@ -48,7 +54,7 @@ export default class Nav extends Component {
                 </div>
                 <button className = { Styles.hidden }>Выйти</button>
             </>
-        ;
+        );
     };
 
     _logout = () => {
