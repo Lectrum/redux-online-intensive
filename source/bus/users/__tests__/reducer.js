@@ -11,10 +11,10 @@ describe('users reducer', () => {
     });
 
     test('should return filled array with users on fill users action', () => {
-        expect(usersReducer(initialState, usersActions.fillUsers(__.profileSet))).toEqual(fromJS(__.profileSet));
+        expect(usersReducer(initialState, usersActions.fillUsers(__.userProfileSet))).toEqual(fromJS(__.userProfileSet));
     });
 
     test('should return empty array on clear users', () => {
-        expect(usersReducer(fromJS(__.profileSet), usersActions.clearUsers())).toEqual(initialState.clear());
+        expect(usersReducer(fromJS(__.userProfileSet), usersActions.clearUsers())).toEqual(initialState.clear());
     });
 });

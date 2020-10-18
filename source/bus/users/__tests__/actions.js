@@ -3,7 +3,7 @@ import { types } from '../types';
 
 describe('users actions', () => {
     test('should handle fill users actions', () => {
-        expect(usersActions.fillUsers(__.profileSet)).toEqual({ type: types.FILL_USERS, payload: __.profileSet });
+        expect(usersActions.fillUsers(__.userProfileSet)).toEqual({ type: types.FILL_USERS, payload: __.userProfileSet });
     });
 
     test('should handle clear users actions', () => {

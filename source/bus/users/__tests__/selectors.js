@@ -3,12 +3,12 @@ import { fromJS } from 'immutable';
 import { usersSelectors } from '../selectors';
 
 const state = {
-    users: fromJS(__.profileSet),
+    users: fromJS(__.userProfileSet),
 };
 
 describe('users selectors', () => {
     test('should select users', () => {
-        expect(usersSelectors.selectUsers(state)).toEqual(fromJS(__.profileSet));
+        expect(usersSelectors.selectUsers(state)).toEqual(fromJS(__.userProfileSet));
     });
 
     test('should select user by id', () => {

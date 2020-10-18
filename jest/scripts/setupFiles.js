@@ -15,7 +15,7 @@ const userProfile = {
     token,
 };
 
-const profileSet = [userProfile, { ...userProfile, id: 'TEST_ID_2' }, { ...userProfile, id: 'TEST_ID_3' }];
+const userProfileSet = [userProfile, { ...userProfile, id: 'TEST_ID_2' }, { ...userProfile, id: 'TEST_ID_3' }];
 
 const newName = {
     firstName: 'Walter',
@@ -37,6 +37,11 @@ const credentials = {
 
 const responseDataSuccess = {
     data:    userProfile,
+    message: successMessage,
+};
+
+const responseDataSuccessProfiles = {
+    data:    userProfileSet,
     message: successMessage,
 };
 
@@ -63,11 +68,12 @@ const url = 'https://www.url.com';
 
 global.__ = {
     userProfile,
-    profileSet,
+    userProfileSet,
     errorMessage,
     token,
     error,
     responseDataSuccess,
+    responseDataSuccessProfiles,
     responseDataFail,
     fetchResponseSuccess,
     fetchResponseFail401,

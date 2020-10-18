@@ -12,7 +12,7 @@ export function* fetchUsers () {
         const { data: users, message } = yield apply(response, response.json);
 
         if (response.status !== 200) {
-            throw new Error(response.message);
+            throw new Error(message);
         }
 
         yield put(usersActions.fillUsers(users));
