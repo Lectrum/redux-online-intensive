@@ -1,10 +1,13 @@
 // Core
-import { object, string, boolean } from 'yup';
+import { object, string, boolean } from 'yup'; // Валидатор: небольшой и с хорошим интерейсом.
+
+// Instruments
+import { invite } from "../../REST/config";
 
 export const login = {
     shape: {
-        email:    '',
-        password: '',
+        email:    'elon.musk@spaceX.com',
+        password: '12345',
         remember: false,
     },
     schema: object().shape({
@@ -19,14 +22,14 @@ export const login = {
 };
 
 export const signup = {
-    shape: {
-        firstName: '',
-        lastName:  '',
-        email:     '',
-        password:  '',
-        invite:    '',
+    shape: { // Изначальное состояние (модель) формы.
+        firstName: 'Elon',
+        lastName:  'Musk',
+        email:     'elon.musk@spaceX.com',
+        password:  '12345',
+        invite,
     },
-    schema: object().shape({
+    schema: object().shape({ // Правила валидации формы.
         firstName: string().required(),
         lastName:  string().required(),
         email:     string()
@@ -37,8 +40,8 @@ export const signup = {
             .min(5),
         invite: string()
             .required()
-            .min(12)
-            .max(12),
+            .min(11)
+            .max(11),
     }),
 };
 

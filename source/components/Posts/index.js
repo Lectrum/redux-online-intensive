@@ -1,37 +1,69 @@
 // Core
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+// connect принимает функцию mapStateToProps первым аргументом.
+// mapStateToProps умеет доставать объект состояния из redux.
+import { bindActionCreators } from "redux";
 import { List } from 'immutable';
 import FlipMove from 'react-flip-move';
 
 // Instruments
 import Styles from './styles.m.css';
-import { mockedProfile } from '../../instruments/mockedData';
+//import { mockedProfile } from '../../instruments/mockedData';
 
 // Components
 import { Composer, Catcher, Post } from '../../components';
 
+// Actions
+import { postActions } from '../../bus/posts/actions';
+
+const mapStateToProps = (state) => {
+    return {
+        posts:   state.posts,
+        profile: state.profile,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(
+            {
+                fetchPostsAsync: postActions.fetchPostsAsync,
+                createPostAsync: postActions.createPostAsync,
+            },
+            dispatch
+        ),
+    };
+};
+
+@connect(
+    mapStateToProps,
+    mapDispatchToProps
+)
 export default class Posts extends Component {
     static defaultProps = {
         // State
-        posts:   List(),
-        profile: mockedProfile,
+        //posts:   List(),
+        //profile: mockedProfile,
 
         // Actions
-        actions: {
-            // Users
-            fetchUsersAsync: () => {},
+        // actions: {
+        //     // Users
+        //     fetchUsersAsync: () => {},
 
-            // Posts
-            fetchPostsAsync: () => {},
-            removePostAsync: () => {},
-            createPostAsync: () => {},
-            likePostAsync:   () => {},
-            unlikePostAsync: () => {},
-        },
+        //     // Posts
+        //     fetchPostsAsync: () => {},
+        //     removePostAsync: () => {},
+        //     createPostAsync: () => {},
+        //     likePostAsync:   () => {},
+        //     unlikePostAsync: () => {},
+        // },
     };
 
     componentDidMount () {
         const { actions } = this.props;
+
+        //console.log('!!! this.props', this.props);
 
         actions.fetchPostsAsync();
     }
