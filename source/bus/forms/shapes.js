@@ -1,5 +1,5 @@
 // Core
-import { object, string, boolean } from 'yup';
+import { object, string, boolean } from 'yup'; // Валидатор с хорошим интерейсом.
 
 export const login = {
     shape: {
