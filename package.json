@@ -92,7 +92,7 @@
         "postcss-reporter": "~5.0.0",
         "prettier-eslint-cli": "~4.7.1",
         "prop-types": "~15.6.2",
-        "react-dev-utils": "^5.0.1",
+        "react-dev-utils": "^11.0.4",
         "react-hot-loader": "~4.3.4",
         "redux-logger": "^3.0.6",
         "redux-saga-test-plan": "~3.7.0",
